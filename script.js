@@ -1,5 +1,5 @@
-const API_KEY = "YOUR_API_KEY"; // Ganti dengan API Key YouTube
-const CHANNEL_ID = "YOUR_CHANNEL_ID"; // Ganti dengan Channel ID
+const API_KEY = "AIzaSyDwyVmxv3RKZETh-qgByWbQaVK7Naf4-L0"; // Ganti dengan API Key YouTube
+const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw"; // Ganti dengan Channel ID
 let nextPageToken = "";
 
 const emojiMap = {
