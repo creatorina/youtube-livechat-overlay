@@ -1,13 +1,14 @@
 // == Konteks ==
 // - Menampilkan live chat YouTube secara otomatis saat channel sedang live
 // - Menjaga konversi emoji teks (misalnya :_LIKE:) menjadi gambar
+// - Menambahkan ikon moderator jika user adalah mod
+// - Menampilkan badge membership jika user adalah sponsor
 
 const API_KEY = "AIzaSyDwyVmxv3RKZETh-qgByWbQaVK7Naf4-L0"; // Ganti dengan API Key YouTube
 const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw"; // Ganti dengan Channel ID
 let nextPageToken = "";
 let pollingInterval = 5000; // default 5 detik
 
-// Emoji mapping tetap
 const emojiMap = {
   ":_LOVE:": "https://yt3.googleusercontent.com/GBA98bgNVXPmXWGcqUq-dkTxO8vVLbO5I9wc7_TVlQpJzXg5eiolw1Sfnv0sOrFNo3RUKeRJ_fQ",
   ":_LIKE:": "https://yt3.googleusercontent.com/4LBAvTkbhBn7EEaVAbVWzpsTiGKvdHgRcuwJKG6iWM467YufUd-uF229DKtQGq5LvtjiOWX4bmI",
@@ -60,7 +61,7 @@ function replaceTextEmojis(text) {
   let output = text;
   for (const key in emojiMap) {
     const regex = new RegExp(key.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&'), 'g');
-    output = output.replace(regex, `<img class="emoji" src="${emojiMap[key]}" alt="${key}">`);
+    output = output.replace(regex, `<img class=\"emoji\" src=\"${emojiMap[key]}\" alt=\"${key}\">`);
   }
   return output;
 }
@@ -90,14 +91,21 @@ async function fetchChat(liveChatId) {
       const avatar = item.authorDetails.profileImageUrl;
       const message = replaceTextEmojis(item.snippet.displayMessage);
       const isMember = item.authorDetails.isChatSponsor;
+      const isModerator = item.authorDetails.isChatModerator;
 
       const container = document.createElement("div");
       container.className = "chat-message";
+
+      const modIcon = isModerator ? `<img class=\"mod-icon\" src=\"https://cdn-icons-png.freepik.com/256/9795/9795156.png\" alt=\"Mod\">` : "";
+      const badge = isMember ? `<div class=\"badge\">MEMBER</div>` : "";
+
       container.innerHTML = `
-        <img class="avatar" src="${avatar}" alt="Avatar">
-        <div class="content">
-          <div class="author">${author} ${isMember ? '<span style="color: gold;">★</span>' : ''}</div>
-          <div class="message">${message}</div>
+        <img class=\"avatar\" src=\"${avatar}\" alt=\"Avatar\">
+        <div class=\"content\">
+          <div class=\"author\">
+            ${modIcon}${author}${badge}
+          </div>
+          <div class=\"message\">${message}</div>
         </div>`;
 
       const chatBox = document.getElementById("chat");
