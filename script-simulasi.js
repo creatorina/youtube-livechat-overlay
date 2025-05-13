@@ -41,7 +41,7 @@ function injectDummyChat() {
   const chatBox = document.getElementById("chat");
   dummyChats.forEach((user, i) => {
     setTimeout(() => {
-      const modIcon = user.isMod ? `<img class="mod-icon" src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Mod">` : "";
+      const modIcon = user.isMod ? `<img class="mod-icon" src="https://cdn-icons-png.freepik.com/256/9795/9795156.png" alt="Mod">` : "";
       const badge = user.isMember ? `<div class="badge">MEMBER</div>` : "";
       const msg = replaceTextEmojis(user.message);
       const container = document.createElement("div");
