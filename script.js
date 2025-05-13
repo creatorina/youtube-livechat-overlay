@@ -13,11 +13,11 @@ const emojiMap = {
   ":_LIKE:": "https://yt3.googleusercontent.com/4LBAvTkbhBn7EEaVAbVWzpsTiGKvdHgRcuwJKG6iWM467YufUd-uF229DKtQGq5LvtjiOWX4bmI",
   ":_takut:": "https://yt3.googleusercontent.com/hKcqUVRX93rdIRJmOFA69Gf3YX_ceMM7lTZf2OCWGNT7SnxkovTK62CoKifLUlMGSQ7EfCao3g",
   ":_Sus:": "https://yt3.googleusercontent.com/NHEw3e4tEIkeo5ErgqoWiXss1-CNJN-jhwpRYmJRMNOAV4Dp9lUN4y5uAOKLNFFRNjQclbHA_r8",
-  ":_Nice:": "https://yt3.googleusercontent.com/G1KqpWi-oZ48YeRDiGZCfoJ9UWK_N46OnurGVu31vmLyyjzpZ7Ts2G8Ia31vrrhF_tKEZl8Q"
-  ":_Wlee:": "https://yt3.googleusercontent.com/Jdym54Pn4MRbmKnp_bHUpCg7SoPQskfOBOU70qJw_JQ21PEj-PNFqRYJ6Jh20iO_Og0x3mPOeA"
-  ":_Hmm:": "https://yt3.googleusercontent.com/MW47wFy372vLTz2lWhpZjiD6CR0SwbMpZ-BNccofhi53QumPg4vTUhofa2Mt4ro4CIVkVCa0Zw"
-  ":_Yawn:": "https://yt3.googleusercontent.com/t1_0pWjgOwZAzAQXzBuEUY4afcPCyv2tsgp77VapGtyOBhukZyREUVXy5EmTOEWLJaKs1CwD"
-  ":_Wkwk:": "https://yt3.googleusercontent.com/F1rSJ9p-vhFOUCEfEmtFXDw5gUqGNQiKuKo2TmupqkVIJvj4s3PRKIpumZQghREpxv4R2JqPubs"
+  ":_Nice:": "https://yt3.googleusercontent.com/G1KqpWi-oZ48YeRDiGZCfoJ9UWK_N46OnurGVu31vmLyyjzpZ7Ts2G8Ia31vrrhF_tKEZl8Q",
+  ":_Wlee:": "https://yt3.googleusercontent.com/Jdym54Pn4MRbmKnp_bHUpCg7SoPQskfOBOU70qJw_JQ21PEj-PNFqRYJ6Jh20iO_Og0x3mPOeA",
+  ":_Hmm:": "https://yt3.googleusercontent.com/MW47wFy372vLTz2lWhpZjiD6CR0SwbMpZ-BNccofhi53QumPg4vTUhofa2Mt4ro4CIVkVCa0Zw",
+  ":_Yawn:": "https://yt3.googleusercontent.com/t1_0pWjgOwZAzAQXzBuEUY4afcPCyv2tsgp77VapGtyOBhukZyREUVXy5EmTOEWLJaKs1CwD",
+  ":_Wkwk:": "https://yt3.googleusercontent.com/F1rSJ9p-vhFOUCEfEmtFXDw5gUqGNQiKuKo2TmupqkVIJvj4s3PRKIpumZQghREpxv4R2JqPubs",
   ":yt:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/yt.svg",
   ":buffering:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/buffering.svg",
   ":oops:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/oops.svg",
