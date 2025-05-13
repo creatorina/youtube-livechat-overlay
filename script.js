@@ -1,7 +1,13 @@
+// == Konteks ==
+// - Menampilkan live chat YouTube secara otomatis saat channel sedang live
+// - Menjaga konversi emoji teks (misalnya :_LIKE:) menjadi gambar
+
 const API_KEY = "AIzaSyDwyVmxv3RKZETh-qgByWbQaVK7Naf4-L0"; // Ganti dengan API Key YouTube
 const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw"; // Ganti dengan Channel ID
 let nextPageToken = "";
+let pollingInterval = 5000; // default 5 detik
 
+// Emoji mapping tetap
 const emojiMap = {
   ":_LOVE:": "https://yt3.googleusercontent.com/GBA98bgNVXPmXWGcqUq-dkTxO8vVLbO5I9wc7_TVlQpJzXg5eiolw1Sfnv0sOrFNo3RUKeRJ_fQ",
   ":_LIKE:": "https://yt3.googleusercontent.com/4LBAvTkbhBn7EEaVAbVWzpsTiGKvdHgRcuwJKG6iWM467YufUd-uF229DKtQGq5LvtjiOWX4bmI",
@@ -53,21 +59,22 @@ const emojiMap = {
 function replaceTextEmojis(text) {
   let output = text;
   for (const key in emojiMap) {
-    const regex = new RegExp(key.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&'), 'g');
+    const regex = new RegExp(key.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&'), 'g');
     output = output.replace(regex, `<img class="emoji" src="${emojiMap[key]}" alt="${key}">`);
   }
   return output;
 }
 
-async function getLiveChatId() {
+async function getLiveVideoId() {
   const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`);
   const data = await res.json();
-  const videoId = data.items[0]?.id?.videoId;
-  if (!videoId) throw new Error("No live video found");
+  return data.items[0]?.id?.videoId || null;
+}
 
-  const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${videoId}&key=${API_KEY}`);
-  const videoData = await videoRes.json();
-  return videoData.items[0].liveStreamingDetails.activeLiveChatId;
+async function getLiveChatId(videoId) {
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${videoId}&key=${API_KEY}`);
+  const data = await res.json();
+  return data.items[0]?.liveStreamingDetails?.activeLiveChatId || null;
 }
 
 async function fetchChat(liveChatId) {
@@ -76,6 +83,7 @@ async function fetchChat(liveChatId) {
     const res = await fetch(url);
     const data = await res.json();
     nextPageToken = data.nextPageToken;
+    pollingInterval = data.pollingIntervalMillis || 3000;
 
     data.items.forEach(item => {
       const author = item.authorDetails.displayName;
@@ -94,25 +102,32 @@ async function fetchChat(liveChatId) {
 
       const chatBox = document.getElementById("chat");
       chatBox.appendChild(container);
-
       if (chatBox.childElementCount > 50) {
         chatBox.removeChild(chatBox.firstChild);
       }
     });
-
-    setTimeout(() => fetchChat(liveChatId), data.pollingIntervalMillis || 3000);
   } catch (err) {
     console.error("Fetch chat error:", err);
-    setTimeout(() => fetchChat(liveChatId), 5000);
+  } finally {
+    setTimeout(() => fetchChat(liveChatId), pollingInterval);
   }
 }
 
-(async () => {
+async function startChatListener() {
   try {
-    const chatId = await getLiveChatId();
-    fetchChat(chatId);
+    const videoId = await getLiveVideoId();
+    if (!videoId) {
+      document.getElementById("chat").innerHTML = "<p>🔴 Tidak ada siaran langsung saat ini.</p>";
+      setTimeout(startChatListener, 30000); // Cek lagi setiap 30 detik jika belum live
+      return;
+    }
+    const chatId = await getLiveChatId(videoId);
+    if (chatId) fetchChat(chatId);
+    else throw new Error("Chat ID not found.");
   } catch (e) {
-    console.error("Unable to load chat:", e);
-    document.getElementById("chat").innerHTML = "<p>🔴 Tidak ada siaran langsung saat ini.</p>";
+    console.error("Unable to start chat listener:", e);
+    setTimeout(startChatListener, 30000); // Retry nanti
   }
-})();
+}
+
+startChatListener();
