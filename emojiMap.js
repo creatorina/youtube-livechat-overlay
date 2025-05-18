@@ -43,5 +43,5 @@ const emojiMap = {
   ":videocall:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/videocall.svg",
   ":virtualhug:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/virtualhug.svg",
   ":washhands:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/washhands.svg",
-  ":yougotthis:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/yougotthis.svg",
+  ":yougotthis:": "https://www.gstatic.com/youtube/img/emojis/emojis-svg/yougotthis.svg"
 };
