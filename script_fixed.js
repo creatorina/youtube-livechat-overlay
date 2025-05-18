@@ -9,8 +9,6 @@ const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw"; // Ganti dengan Channel ID
 let nextPageToken = "";
 let pollingInterval = 5000; // default 5 detik
 
-<script src="emojiMap.js"></script>
-
 function replaceTextEmojis(text) {
   let output = text;
   for (const key in emojiMap) {
