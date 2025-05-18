@@ -20,12 +20,6 @@ function replaceTextEmojis(text) {
   return output;
 }
 
-const chatBox = document.getElementById("chat");
-chatBox.appendChild(container);
-if (chatBox.childElementCount > 20) {
-  chatBox.removeChild(chatBox.firstChild);
-}
-
 async function getLiveVideoId() {
   const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`);
   const data = await res.json();
@@ -70,7 +64,7 @@ async function fetchChat(liveChatId) {
 
       const chatBox = document.getElementById("chat");
       chatBox.appendChild(container);
-      if (chatBox.childElementCount > 50) {
+      if (chatBox.childElementCount > 20) {
         chatBox.removeChild(chatBox.firstChild);
       }
     });
