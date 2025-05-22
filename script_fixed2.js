@@ -4,8 +4,8 @@
 // - Menambahkan ikon moderator jika user adalah mod
 // - Menampilkan badge membership jika user adalah sponsor
 
-const API_KEY = "AIzaSyDwyVmxv3RKZETh-qgByWbQaVK7Naf4-L0"; // Ganti dengan API Key YouTube
-const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw"; // Ganti dengan Channel ID
+const API_KEY = "API KEY KAMU"; // Ganti dengan API Key YouTube
+const CHANNEL_ID = "ID KEY KAMU"; // Ganti dengan Channel ID
 let nextPageToken = "";
 let pollingInterval = 5000; // default 5 detik
 
