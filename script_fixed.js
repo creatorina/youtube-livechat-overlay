@@ -1,5 +1,5 @@
-const API_KEY = "AIzaSyDwyVmxv3RKZETh-qgByWbQaVK7Naf4-L0";
-const CHANNEL_ID = "UCibFcTqpMXuOKoJkX4UK0Dw";
+const API_KEY = "API KEY KAMU";
+const CHANNEL_ID = "ID CHANEL KM";
 let nextPageToken = "";
 let pollingInterval = 5000;
 
